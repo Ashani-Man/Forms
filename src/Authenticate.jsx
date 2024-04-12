@@ -1,11 +1,11 @@
 import  {useState}  from "react";
 
-const Authenticate = () => {
+const Authenticate = ({token,setLoggedIn}) => {
   const [success,setSuccess] = useState(null)
   const [error,setError] = useState(null)
-const handleClick = async (token) => {
-  token.preventDefault();
-  //console.log(" ")
+  const handleClick = async (e) => {
+  //token.preventDefault();
+  
   try {
     const response = await fetch("https://fsa-jwt-practice.herokuapp.com/authenticate",{
       method : "Get",
@@ -13,11 +13,13 @@ const handleClick = async (token) => {
       Authorization: `Bearer ${token}`}
       
     })
-    const result = await response.json()
-    setSuccess(result.message)
-
-    console.log(json)
-
+    const json = await response.json();
+      console.log(json);
+      console.log("Message", json.message);
+      setSuccess(json.message);
+      if(json.success){
+        setLoggedIn(true);
+      }
     
   } catch (error) {
     setError(error.message)

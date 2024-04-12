@@ -5,27 +5,23 @@ const SignUpForm = () => {
   const [username, setusername] = useState(" ");
   const [password, setpassword] = useState(" ");
   const [error, seterror] = useState(null);
+
   
-  const  handleSubmit =  async (event) => {
+  async function handleSubmit(event) {
     event.preventDefault();
     try {
-       const response =  await fetch("https://fsa-jwt-practice.herokuapp.com/signup",{
+      const response = await fetch("https://fsa-jwt-practice.herokuapp.com/signup", {
         method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({
-
-        })
-      
-      })
-      const result =  await response.json();
-      console.log(result)
-      setToken(result.token);
-      
-  
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({})
+      });
+      const result = await response.json();
+      console.log(result);
+      //setToken(result.token);
     } catch (error) {
-      seterror(error.message)
+      seterror(error.message);
 
-      
+
     }
   }
 
